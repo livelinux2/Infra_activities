@@ -1,0 +1,19 @@
+---
+# Add ltb key
+# Add ltb reposoitory
+- name: RedHat | Add ltb-project repo
+  yum_repository:
+    name: ltb-project
+    description: OpenLdap LTB Project
+    baseurl: http://ltb-project.org/rpm/$releasever/$basearch
+    gpgkey: http://ltb-project.org/wiki/lib/RPM-GPG-KEY-LTB-project
+    gpgcheck: no
+# Install / update pacakges : 
+- name: RedHat | openldap package
+  package:
+    name: "{{ item }}"
+    state: "{{ packages_version |default('present') }}"
+  with_items:
+    - openldap-ltb
+    - openldap-ltb-contrib-overlays
+    - openldap-ltb-mdb-utils

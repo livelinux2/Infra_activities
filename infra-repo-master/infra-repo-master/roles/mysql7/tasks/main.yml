@@ -1,0 +1,19 @@
+---
+- name: Download MySQL Community Repo
+  get_url:
+    url: "{{ mysql_repo_url }}"
+    dest: /tmp
+
+
+- name: Install MySQL Community Repo
+  command: /usr/bin/rpm -ivh /tmp/mysql-community-release-el7-7.noarch.rpm
+  ignore_errors: yes
+
+- name: Install mysql using yum
+  action: yum pkg={{item}} state=latest
+  with_items:
+      - mysql-community-server
+      - mysql-community-client
+      - MySQL-python
+  ignore_errors: yes
+  notify: restart mysql

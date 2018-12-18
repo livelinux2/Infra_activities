@@ -1,0 +1,10 @@
+-
+  name: setup primary ldap server
+  hosts: edfxeuw1aadmx04
+  roles:
+    - epel
+    - remi
+    - common
+    - ebs_vol
+    - mount
+    - nginx

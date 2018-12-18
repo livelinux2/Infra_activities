@@ -1,0 +1,7 @@
+---
+  - name: launch primary ldap stack_filecloudformation
+    cloudformation:
+      stack_name: "Primary Ldap Stack"
+      state: present
+      disable_rollback: false
+      template: "roles/cloudformation/files/edfxeuw1aadmx04.json"

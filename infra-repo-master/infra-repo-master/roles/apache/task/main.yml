@@ -1,0 +1,3 @@
+---
+- name: Install apache2 using yum
+  action: yum pkg=httpd state=latest

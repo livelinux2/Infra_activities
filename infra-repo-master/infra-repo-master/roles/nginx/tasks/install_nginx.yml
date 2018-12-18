@@ -1,0 +1,14 @@
+# Install / update pacakges :
+- name: RedHat | Nginx package
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - nginx
+#Create conf.d if doesn't exist
+- name: Creates directory
+  file:
+    path: /etc/nginx/conf.d/
+    state: directory
+    owner: root
+    group: root

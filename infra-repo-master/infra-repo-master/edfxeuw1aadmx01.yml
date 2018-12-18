@@ -1,0 +1,6 @@
+-
+  name: setup new server
+  hosts: testm
+  roles:
+    - epel
+    - nginx

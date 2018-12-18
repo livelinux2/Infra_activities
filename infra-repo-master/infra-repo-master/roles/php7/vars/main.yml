@@ -1,0 +1,5 @@
+---
+libargon_repo_url: "http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/l/libargon2-20161029-2.el7.x86_64.rpm"
+libtidy_repo_url: "http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/l/libtidy-5.4.0-1.el7.x86_64.rpm"
+freetds_repo_url: "http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/f/freetds-0.95.81-1.el7.x86_64.rpm"
+libmcrypt_repo_url: "http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/l/libmcrypt-2.5.8-13.el7.x86_64.rpm"

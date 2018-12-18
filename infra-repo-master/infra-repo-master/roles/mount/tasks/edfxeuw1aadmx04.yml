@@ -1,0 +1,45 @@
+---
+
+  - name: pushing admin partition mounting script
+    template:
+      src: templates/systemctl.mount.j2
+      dest: /etc/systemd/system/admin.mount
+      owner: root
+      group: root
+      mode: 755
+    with_items:
+      - { description: "admin", partition: "/dev/vgadmin/lvadmin", mount_point: "/admin", fs_type: "ext4", options: "defaults" }
+
+  - name: pushing ldap partition mounting script
+    template:
+      src: templates/systemctl.mount.j2
+      dest: /etc/systemd/system/admin-ldap.mount
+      owner: root
+      group: root
+      mode: 755
+    with_items:
+        -  { description: "admin-ldap", partition: "/dev/vgldap/lvldap", mount_point: "/admin/ldap", fs_type: "ext4", options: "defaults" }
+
+  - name: creating symbolic link to multi-user target for admin partition
+    file:
+      src: /etc/systemd/system/admin.mount
+      dest: /etc/systemd/system/multi-user.target.wants/admin.mount
+      state: link
+
+  - name: creating symbolic link to multi-user target for ldap partition
+    file:
+      src: /etc/systemd/system/admin-ldap.mount
+      dest: /etc/systemd/system/multi-user.target.wants/admin-ldap.mount
+      state: link
+
+  - name: enable a admin partition systemctl service
+    systemd:
+      name: admin.mount
+      state: started
+      enabled: True
+
+  - name: enable a ldap partition systemctl service
+    systemd:
+      name: admin-ldap.mount
+      state: started
+      enabled: True

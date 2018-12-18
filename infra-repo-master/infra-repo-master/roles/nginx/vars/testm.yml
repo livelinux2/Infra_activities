@@ -1,0 +1,12 @@
+---
+nginx_user: "nginx"
+worker_p: 1
+worker_connections: "1024"
+sendfile: "on"
+#tcp_nopush: ""
+#tcp_nodelay: ""
+keepalive_timeout: "65"
+#types_hash_max_size: ''
+client_max_body_size: "50m"
+server_tokens: "off"
+server_name_default: "localhost"

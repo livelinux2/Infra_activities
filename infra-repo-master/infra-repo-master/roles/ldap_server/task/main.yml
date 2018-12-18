@@ -1,0 +1,11 @@
+# This Playhook contents all task need to be done on the ldap(s) server
+# Feature on the 2016/11/08 :
+# - Update Manager Password 
+# - deploy ldap-stats.pl
+---
+ - include: package.yml
+ - include: tools.yml
+ - include: update_pwd_manager.yml
+   tags: [ 'pwd' ]
+     when: slap_passwd is defined
+#

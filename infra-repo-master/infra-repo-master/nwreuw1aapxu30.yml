@@ -1,0 +1,10 @@
+---
+
+- name: apply common configuration to all nodes
+  hosts: nwreuw1aapxp30
+  remote_user: root
+
+  roles:
+    - epel
+    - mysql7
+    - apache

@@ -1,0 +1,130 @@
+{
+	"AWSTemplateFormatVersion": "2010-09-09",
+	"Description": "Ldap Stack",
+	"Parameters" : {
+	"VPC"    : {
+			"Description"   : "VPC ID of the Host",
+			"Type"			: "String",
+			"Default"       : "vpc-1e029176"
+				},
+	 "AppSubnetIds"    : {
+			"Description"   : "Subnet ID of the Host",
+			"Type"			: "String" ,
+			"Default"       : "subnet-a30291cb"
+				},
+	"SGs" : {
+		"Description" : "Security Groups attached to the instance",
+		"Type" 		  : "CommaDelimitedList",
+		"Default" 	  : "sg-95ab6ef1, sg-6bc4de07, sg-ec27d889, sg-b41ff0d2, sg-2b48bd4e"
+		  },
+	"InstanceType" : {
+		"Description" : "Enter t2.micro, t2.large,  m1.small, or m1.large. Default is t2.micro.",
+		"Type"		  : "String",
+		"Default" 	  : "t3.micro"
+	  },
+	 "AZs" : {
+
+			"Description" : "AvailabilityZones for your Virtual Private Cloud (VPC)",
+			"Type" : "String",
+			"Default" : "eu-west-1a"
+		},
+
+	"KeyName" : {
+		"Description" : "Amazon EC2 Key Pair",
+		"Type" 		  : "String",
+		"Default" 	  : "rhr"
+
+				},
+	"AMI" : {
+		"Description" : "Cent OS 7 Base AMI with ldap configs",
+		"Type" 	  : "String",
+		"Default" : "ami-03192b983cfedf174"
+			}
+},
+	"Resources" : {
+
+		"edfxeuw1aadmx04" : {
+			"Type" : "AWS::EC2::Instance",
+			"Properties" : {
+			"AvailabilityZone": {"Ref" : "AZs"},
+			"ImageId" : {"Ref" : "AMI"},
+			"InstanceType" : {"Ref" : "InstanceType"},
+			"SecurityGroupIds" : { "Ref" : "SGs"},
+			"KeyName":  {"Ref" : "KeyName"},
+			"SubnetId" : { "Ref": "AppSubnetIds"},
+			"Tags" : [
+					{
+						"Key" : "Application",
+						"Value" : "monitoring authentication reporting"
+					},
+					{
+						"Key" : "Environment",
+						"Value" : "prod"
+					},
+					{
+						"Key" : "Name",
+						"Value" : "edfxeuw1aadmx04"
+					},
+					{
+						"Key" : "Project",
+						"Value" : "INFRA"
+					},
+					{
+						"Key" : "SnapshotSchedule",
+						"Value" : "Daily-02:30"
+					},
+					{
+						"Key" : "Comment",
+						"Value" : "Main admin server: nagios wiki perfmon yum ..."
+					},
+					{
+						"Key" : "Customer",
+						"Value" : "ESIA / Gilles O."
+					},
+					{
+						"Key" : "env",
+						"Value" : "adm"
+					},
+					{
+						"Key" : "Monitoring",
+						"Value" : "Prometheus"
+					},
+					{
+						"Key" : "my-subscription",
+						"Value" : "[linux-sensu-default,ldap,ldap_master,postfix]"
+					},
+					{
+						"Key" : "prometheus-exporter",
+						"Value" : "ldap"
+					},
+					{
+						"Key" : "Monitoring",
+						"Value" : "Prometheus"
+					},
+					{
+						"Key" : "my-subscription",
+						"Value" : "[linux-sensu-default,ldap,ldap_master,postfix]"
+					},
+					{
+						"Key" : "prometheus-exporter",
+						"Value" : "ldap"
+					}
+				],
+				"UserData" : { "Fn::Base64" : { "Fn::Join" : ["", [
+							 "#!/bin/bash\n",
+							 "#Setting up hostname\n\n",
+							 "h='edfxeuw1aadmx04'\n",
+							 "[[ ! \"$(grep $h /etc/hostname)\" ]] && sed -i \"s/.*/$h/g\" /etc/hostname\n",
+							 "[[ ! $(grep \"HOSTNAME=$h\" /etc/sysconfig/network) ]] && sed -i \"1iHOSTNAME=$h\" /etc/sysconfig/network\n",
+							 "[[ ! \"$(grep $h /etc/hosts)\" ]] && sed -i \"s/127.0.0.1.*/& $h/g\" /etc/hosts\n\n"
+							  ]]}}
+
+
+			}
+
+		}
+
+		}
+
+
+}

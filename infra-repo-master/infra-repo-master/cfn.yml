@@ -1,0 +1,6 @@
+- hosts: localhost
+  connection: local
+  gather_facts: False
+
+  tasks:
+    - include_tasks: roles/cloudformation/task/primary_ldap_stack.yml

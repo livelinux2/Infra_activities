@@ -1,0 +1,3 @@
+testm    ansible_host=13.126.250.3 ansible_connection=ssh        ansible_user=root
+localhost ansible_host=127.0.0.1
+edfxeuw1aadmx04 ansible_host=10.10.0.127 ansible_connection=ssh        ansible_user=root

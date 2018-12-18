@@ -1,0 +1,5 @@
+_region: "eu-west-1"
+_instance_id: "i-01c13d1fc7b074548"
+vol_hash_list:
+  - { vol: "vol-0719d0f78292dee03", device: "/dev/sdh" }
+  - { vol: "vol-0aca0096a13f8fe3b", device: "/dev/sdg" }

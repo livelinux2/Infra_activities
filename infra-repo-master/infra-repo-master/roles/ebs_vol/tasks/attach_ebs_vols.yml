@@ -1,0 +1,13 @@
+---
+  - name: Create an empty file
+    file: path=/tmp/ebs-vol.sh state=touch owner=root group=root mode=0755
+
+  - name: Update vol attach script
+    lineinfile:
+      path: /tmp/ebs-vol.sh
+      line: "aws ec2 attach-volume --region={{_region}} --volume-id {{item.vol}} --instance-id {{_instance_id}} --device '{{item.device}}'"
+    with_items:
+        - "{{ vol_hash_list }}"
+
+  - name: Execute the script
+    command: /bin/bash /tmp/ebs-vol.sh

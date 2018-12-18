@@ -1,0 +1,16 @@
+---
+- name: Check if tools directory exist
+  file:
+    state: directory 
+    path: /admin/ldap/tools
+    owner: ldap
+    group: ldap
+    mode: 0775
+- name: Create ldap-stats.pl
+  get_url:
+    url: http://prefetch.net/code/ldap-stats.pl
+    dest: /admin/ldap/tools/ldap-stats.pl
+    mode: 0554
+    owner: ldap
+    group: ldap
+

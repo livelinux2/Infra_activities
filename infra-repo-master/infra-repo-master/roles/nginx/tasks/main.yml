@@ -1,0 +1,4 @@
+---
+- include_vars: "{{ ansible_hostname }}.yml"
+- include: install_nginx.yml
+- include: copy_config.yml

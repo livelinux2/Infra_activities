@@ -1,0 +1,11 @@
+[Unit]
+Description={{ item.description }}
+
+[Mount]
+What={{ item.partition }}
+Where={{ item.mount_point }}
+Type={{ item.fs_type }}
+Options={{ item.options }}
+
+[Install]
+WantedBy=multi-user.target

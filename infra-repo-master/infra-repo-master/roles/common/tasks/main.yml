@@ -1,0 +1,16 @@
+---
+  - name: install basic linux components
+    package:
+      name: "{{ item }}"
+      state: latest
+    with_items:
+      - openssl
+      - python34
+      - python34-pip
+      - tree
+
+  - name: Upgrade pip
+    command: pip3 install --upgrade pip
+
+  - name: Install awscli
+    command: pip3 install awscli

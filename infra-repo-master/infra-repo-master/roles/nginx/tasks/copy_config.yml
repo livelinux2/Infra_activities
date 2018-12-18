@@ -1,0 +1,25 @@
+- name: push server config nginx.conf
+  template:
+    src: templates/nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+    owner: root
+    group: root
+    mode: 644
+
+- name: push server config for non ssl
+  template:
+    src: templates/default.conf.j2
+    dest: /etc/nginx/conf.d/default.conf
+    owner: root
+    group: root
+    mode: 644
+
+- name: push extra config files
+  template:
+    src: "{{ item }}"
+    dest: /etc/nginx/conf.d/
+    owner: root
+    group: root
+    mode: 644
+  with_fileglob:
+    - files/{{ ansible_hostname }}/*
