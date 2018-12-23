@@ -1,0 +1,23 @@
+https://www.softwaretestinghelp.com/ansible-tutorial-1/
+
+ansible webservers -m ping
+ansible webservers --list-hosts
+ansible host/hostgrp -m modules -a "arguements" -u username --become
+ansible webservers -m setup
+ansible webservers -m command -a 'uptime'
+ansible webservers -m command -an 'hostname'
+ansible webservers -m shell -a 'ls -l > temp.txt'
+ansible webservers -m command -a 'cat temp.txt'
+ansible webservers -m user -a 'name=sekhar password=sekhar' --become(privilege to the  superuser to run the command)
+ansible webservers -m user -a 'name=sekhar state=absent' --become
+ansible webservers -m file -a 'dest=/home/ansible/sekhar.txt state=touch mode=755 owner=ansible group=ansible'
+ansible webservers -m file -a 'dest=/home/ansible/sekhar state=directory mode=755'
+ansible webservers -m file -a 'dest=/home/ansible/sekhar state=absent'
+ansible webservers -m copy -a 'src=sekhar dest=/home/ansible'
+ansible webservers -m yum -a 'name=git state=present' --become
+ansible webservers -m yum -a 'name=git state=latest' 
+ansible webservers -m yum -a 'name=git state=absent'
+ansible webservers -m yum -a 'name=httpd state=present' –-become
+ansible webservers -m service -a “name=httpd state=started” --become
+ansible webservers -m service -a “name=httpd state=stopped” --become
+ansible webservers -m service -a “name=httpd state=restarted --become
